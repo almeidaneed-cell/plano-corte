@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Plano de Corte</title>
+  <style>
+    body { font-family: system-ui, Arial; margin: 0; background:#f6f7fb; }
+    header { padding:16px; background:#111827; color:#fff; }
+    main { padding:16px; max-width:1100px; margin:0 auto; }
+    .grid { display:grid; gap:12px; grid-template-columns: 1fr; }
+    .card { background:#fff; border-radius:14px; padding:14px; box-shadow:0 2px 10px rgba(0,0,0,.06); }
+    h2 { margin:0 0 10px; font-size:18px; }
+    label { display:block; font-size:13px; margin:10px 0 6px; }
+    input, button { width:100%; padding:10px; border-radius:10px; }
+    button { background:#111827; color:#fff; border:none; }
+  </style>
+</head>
+<body>
+<header>
+  <h2>Plano de Corte (sem material)</h2>
+</header>
+
+<main class="grid">
+  <div class="card">
+    <h2>Chapa</h2>
+    <label>Largura (mm)</label>
+    <input id="sw" type="number" value="2750">
+    <label>Altura (mm)</label>
+    <input id="sh" type="number" value="1830">
+  </div>
+
+  <div class="card">
+    <h2>Peça</h2>
+    <label>Largura (mm)</label>
+    <input id="pw" type="number" value="600">
+    <label>Altura (mm)</label>
+    <input id="ph" type="number" value="400">
+    <button onclick="calcular()">Adicionar</button>
+  </div>
+
+  <div class="card" id="resultado">
+    <h2>Resultado</h2>
+    <div id="res">Nenhum cálculo ainda</div>
+  </div>
+</main>
+
+<script>
+function calcular(){
+  const sw = +document.getElementById('sw').value;
+  const sh = +document.getElementById('sh').value;
+  const pw = +document.getElementById('pw').value;
+  const ph = +document.getElementById('ph').value;
+
+  const areaChapa = sw * sh;
+  const areaPeca = pw * ph;
+  const qtd = Math.floor(areaChapa / areaPeca);
+
+  document.getElementById('res').innerText =
+    "Quantidade aproximada de peças por chapa: " + qtd;
+}
+</script>
+</body>
+</html>
